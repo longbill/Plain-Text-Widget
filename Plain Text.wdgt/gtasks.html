@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<script>
+		widget.onshow = function()
+		{
+
+		};
+		widget.onhide = function()
+		{
+			var dom = document.getElementById('wrapper');
+			widget.setPreferenceForKey(dom.value,"plaintext");
+		}
+		function onload()
+		{
+			var s = widget.preferenceForKey('plaintext');
+			if (s == undefined) s = '';
+			document.getElementById('wrapper').value = s;
+
+			var x = widget.preferenceForKey("plaintext_x");
+			var y = widget.preferenceForKey("plaintext_y");
+			if (x && y && x > 0 && y >0)
+			{
+				window.resizeTo(x, y);
+			}
+		}
+		function onunload()
+		{
+			widget.onhide();
+		}
+		</script>
+		<script src="resize.js"></script>
+	</head>
+	<body onload="onload()" onunload="onunload()">
+		<div id="front">
+			<div id="topbar">Plain Text</div>
+			<textarea id="wrapper"></textarea>
+			<img id="resize" src="/System/Library/WidgetResources/resize.png" onmousedown="mouseDown(event);">
+		</div>
+	</body>
+</html>
